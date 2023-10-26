@@ -7,6 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import org.testng.asserts.Assertion;
 
 import com.parabank.qa.base.ParaBankBase;
 import com.parabank.qa.pages.ParabankHomePage;
@@ -36,12 +37,16 @@ public class ParaBankLoginTest extends ParaBankBase {
 
 	@Test
 	public static void LoginWithValidCredential() {
-		home = new ParabankHomePage(driver);
 		home.clickOnLogin(dataProp.getProperty("user_Name"), dataProp.getProperty("pass_Word"));
 		ParabankLoginPage loginPage = new ParabankLoginPage(driver);
-		loginPage.AccountServicesRext();
-		Assert.assertTrue(true);
-
+		Assert.assertTrue(loginPage.AccountServicesText());
 	}
+	
+	@Test
+	public static void LoginWith_ValidEmail_And_InvalidPassowrd() {
+		home.clickOnLogin(dataProp.getProperty("user_Name"), ParaBankUtilities.generateUniqueMobile());
+		Assert.assertEquals(home.Error_Message(), "The username and password could not be verified.");
+	}
+	
 
 }

@@ -20,7 +20,9 @@ public class ParabankHomePage {
 	
 	@FindBy(xpath = "//input[@value='Log In']")
 	private WebElement ClickOnLogin;
-
+	@FindBy(xpath = "//p[text()='The username and password could not be verified.']")
+	private WebElement ErrorMessage;
+	
 	public ParabankHomePage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
@@ -37,6 +39,12 @@ public class ParabankHomePage {
 		EnterValidPasswordOption.sendKeys(passWord);
 		ClickOnLogin.click();
 		//return ParabankLoginPage(driver);
+	}
+	
+	
+	
+	public String Error_Message() {
+		return ErrorMessage.getText(); 
 	}
 
 }

@@ -15,7 +15,7 @@ import com.parabank.qa.utils.ParaBankUtilities;
 
 public class ParabankRegisterTest extends ParaBankBase {
 
-	WebDriver driver;
+	public WebDriver driver;
 	ParabankHomePage home;
 	ParabankRegisterPage ParabankRegisterPage;
 	ParabankRegisterPage prp;
@@ -35,7 +35,7 @@ public class ParabankRegisterTest extends ParaBankBase {
 
 	@AfterMethod
 	public void tearDown() {
-		//driver.quit();
+		// driver.quit();
 	}
 
 	@Test
@@ -43,7 +43,7 @@ public class ParabankRegisterTest extends ParaBankBase {
 		prp = new ParabankRegisterPage(driver);
 		prp.Registration(dataProp.getProperty("first_Name"), dataProp.getProperty("last_Name"),
 				dataProp.getProperty("street_Adress"), dataProp.getProperty("city_Name"),
-				dataProp.getProperty("state_Name"), dataProp.getProperty("zip_Code"), dataProp.getProperty("phone_No"),
+				dataProp.getProperty("state_Name"), dataProp.getProperty("zip_Code"),dataProp.getProperty("phone_No")  ,
 				dataProp.getProperty("ssn_Num"), dataProp.getProperty("user_Name"), dataProp.getProperty("pass_Word"),
 				dataProp.getProperty("Repeated_PassWord"));
 		Assert.assertEquals(prp.existing_UserName_Message(), "This username already exists.");
@@ -54,12 +54,10 @@ public class ParabankRegisterTest extends ParaBankBase {
 	public void registeration_With_New_UserName() {
 		prp = new ParabankRegisterPage(driver);
 		pbUtilities = new ParaBankUtilities();
-		prp.Registration(dataProp.getProperty("first_Name") + ParaBankUtilities.generateStringWithTimeStamp(),
-				dataProp.getProperty("last_Name") + ParaBankUtilities.generateStringWithTimeStamp(),
+		prp.Registration(dataProp.getProperty("first_Name"), dataProp.getProperty("last_Name"),
 				dataProp.getProperty("street_Adress"), dataProp.getProperty("city_Name"),
-				dataProp.getProperty("state_Name"), dataProp.getProperty("zip_Code"),
-				dataProp.getProperty("phone_No") + ParaBankUtilities.generateStringWithTimeStamp(),
-				dataProp.getProperty("ssn_Num"), ParaBankUtilities.generateEmailWithTimeStamp(),
+				dataProp.getProperty("state_Name"), dataProp.getProperty("zip_Code"), ParaBankUtilities.generateUniqueMobile(),
+				dataProp.getProperty("ssn_Num"), ParaBankUtilities.generateUniqueUsername(),
 				dataProp.getProperty("pass_Word"), dataProp.getProperty("Repeated_PassWord"));
 		Assert.assertEquals(prp.existing_UserName_Message(), "This username already exists.");
 	}

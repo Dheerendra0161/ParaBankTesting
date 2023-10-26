@@ -16,10 +16,12 @@ WebDriver driver;
 		PageFactory.initElements(driver, this);
 	}
 	
-	public boolean AccountServicesRext() {
-		WelcomeToAccountServices.getText();
-		return true;
+	public boolean AccountServicesText() {
+		boolean welcome = WelcomeToAccountServices.isDisplayed();
+		return welcome;
 	}
+	
+	
 	
 	
 
